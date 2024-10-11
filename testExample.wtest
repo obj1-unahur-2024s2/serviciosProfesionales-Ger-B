@@ -1,9 +1,81 @@
-import example.pepita
+import example.*
 
-describe "group of tests for pepita" {
+describe "Grupo de test para profesionales" {
+  test "El profesional mas caro de empresa1 es Rocio" {
+    const unr = new Universidad(provincia = 'Santa Fe', honorarios = 2800)
+    const unc = new Universidad(provincia = 'Corrientes', honorarios = 4200)
+    const unahur = new Universidad(provincia = 'Buenos Aires', honorarios = 8800)
+    const juana = new ProfesionalVinculado(almaMater = unr)
+    const melina = new ProfesionalesDelLitoral(almaMater = unc)
+    const rocio = new ProfesionalesLibres(
+      almaMater = unahur, honorariosPorHora = 5000, provinciasATrabajar = ['Santa Fe', 'Cordoba', 'Buenos Aires']
+    )
+    const luciana = new ProfesionalesLibres(
+      almaMater = unr, honorariosPorHora = 3200, provinciasATrabajar = ['Santa Fe', 'Entre Rios']
+    )
+    const empresa1 = new Empresa(empleados = [juana, melina, rocio, luciana], honorariosRef = 3500)
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+    assert.equals([rocio], empresa1.nroDeEmpleadosCaros())    
   }
+  test "Las universidades formadoras de emrpesa1 son las universidades de Rosario, Corrientes y Hurlingham" {
+    const unr = new Universidad(provincia = 'Santa Fe', honorarios = 2800)
+    const unc = new Universidad(provincia = 'Corrientes', honorarios = 4200)
+    const unahur = new Universidad(provincia = 'Buenos Aires', honorarios = 8800)
+    const juana = new ProfesionalVinculado(almaMater = unr)
+    const melina = new ProfesionalesDelLitoral(almaMater = unc)
+    const rocio = new ProfesionalesLibres(
+      almaMater = unahur, honorariosPorHora = 5000, provinciasATrabajar = ['Santa Fe', 'Cordoba', 'Buenos Aires']
+    )
+    const luciana = new ProfesionalesLibres(
+      almaMater = unr, honorariosPorHora = 3200, provinciasATrabajar = ['Santa Fe', 'Entre Rios']
+    )
+    const empresa1 = new Empresa(empleados = [juana, melina, rocio, luciana], honorariosRef = 3500)
 
+    assert.equals(#{unr, unc, unahur}, empresa1.universidadesFormadoras())
+  }
+  test "El profesional mas barato de empresa 1 es Juana" {
+    const unr = new Universidad(provincia = 'Santa Fe', honorarios = 2800)
+    const unc = new Universidad(provincia = 'Corrientes', honorarios = 4200)
+    const unahur = new Universidad(provincia = 'Buenos Aires', honorarios = 8800)
+    const juana = new ProfesionalVinculado(almaMater = unr)
+    const melina = new ProfesionalesDelLitoral(almaMater = unc)
+    const rocio = new ProfesionalesLibres(
+      almaMater = unahur, honorariosPorHora = 5000, provinciasATrabajar = ['Santa Fe', 'Cordoba', 'Buenos Aires']
+    )
+    const luciana = new ProfesionalesLibres(
+      almaMater = unr, honorariosPorHora = 3200, provinciasATrabajar = ['Santa Fe', 'Entre Rios']
+    )
+    const empresa1 = new Empresa(empleados = [juana, melina, rocio, luciana], honorariosRef = 3500)
+    assert.equals(juana, empresa1.profesionalMasBarato())
+  }
+  test "La empresa es acotada" {
+    const unr = new Universidad(provincia = 'Santa Fe', honorarios = 2800)
+    const unc = new Universidad(provincia = 'Corrientes', honorarios = 4200)
+    const unahur = new Universidad(provincia = 'Buenos Aires', honorarios = 8800)
+    const juana = new ProfesionalVinculado(almaMater = unr)
+    const melina = new ProfesionalesDelLitoral(almaMater = unc)
+    const rocio = new ProfesionalesLibres(
+      almaMater = unahur, honorariosPorHora = 5000, provinciasATrabajar = ['Santa Fe', 'Cordoba', 'Buenos Aires']
+    )
+    const luciana = new ProfesionalesLibres(
+      almaMater = unr, honorariosPorHora = 3200, provinciasATrabajar = ['Santa Fe', 'Entre Rios']
+    )
+    const empresa1 = new Empresa(empleados = [juana, melina, rocio, luciana], honorariosRef = 3500)
+    assert.that(empresa1.servicioAcotado())
+  }
+  test "La empresa no es acotada si ademas Luciana trabaja en Corrientes y Misiones" {
+    const unr = new Universidad(provincia = 'Santa Fe', honorarios = 2800)
+    const unc = new Universidad(provincia = 'Corrientes', honorarios = 4200)
+    const unahur = new Universidad(provincia = 'Buenos Aires', honorarios = 8800)
+    const juana = new ProfesionalVinculado(almaMater = unr)
+    const melina = new ProfesionalesDelLitoral(almaMater = unc)
+    const rocio = new ProfesionalesLibres(
+      almaMater = unahur, honorariosPorHora = 5000, provinciasATrabajar = ['Santa Fe', 'Cordoba', 'Buenos Aires']
+    )
+    const luciana = new ProfesionalesLibres(
+      almaMater = unr, honorariosPorHora = 3200, provinciasATrabajar = ['Santa Fe', 'Entre Rios', 'Corrientes', 'Misiones']
+    )
+    const empresa1 = new Empresa(empleados = [juana, melina, rocio, luciana], honorariosRef = 3500)
+    assert.notThat(empresa1.servicioAcotado())
+  }
 }
