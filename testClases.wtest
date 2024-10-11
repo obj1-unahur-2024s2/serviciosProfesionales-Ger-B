@@ -1,4 +1,4 @@
-import example.*
+import clases.*
 
 describe "Grupo de test para profesionales" {
   test "El profesional mas caro de empresa1 es Rocio" {
