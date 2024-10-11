@@ -10,16 +10,12 @@ class ProfesionalesDelLitoral inherits Profesional(
   honorariosPorHora = 3000, provinciasATrabajar = ['Entre Rios', 'Santa Fe','Corrientes']){}
 class ProfesionalesLibres inherits Profesional(){}
 
-const profesionalBsAs = new ProfesionalVinculado(almaMater = uni1)
-const profesionalLit = new ProfesionalesDelLitoral(almaMater = 'Corrientes')
-
 // Universidades
 class Universidad{
   const property provincia
   const property honorarios
 }
 
-const uni1 = new Universidad(provincia = 'Buenos Aires', honorarios = 1000)
 // Empresas
 class Empresa{
   const property empleados
@@ -32,4 +28,3 @@ class Empresa{
   method servicioAcotado() = not empleados.any({emp=>emp.provinciasATrabajar().size() > 3})
 } 
 
-const movistar = new Empresa(honorariosRef = 2000, empleados = [])
